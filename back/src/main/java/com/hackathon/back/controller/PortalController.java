@@ -1,6 +1,5 @@
 package com.hackathon.back.controller;
 
-import com.hackathon.back.model.Portal;
 import com.hackathon.back.service.PortalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +32,8 @@ public class PortalController {
             @Parameter(description = "URL do portal") @RequestParam String url, 
             @Parameter(description = "Email de contato") @RequestParam String email) {
         try {
-            // Cria o portal
-            Portal portal = portalService.createPortal(name, url, email);
-            
-            // Gera instruções para configuração do DNS
+            // Cria o portal e gera instruções para configuração do DNS
+            portalService.createPortal(name, url, email);
             List<String> dnsInstructions = portalService.getDnsInstructions(url);
             
             return ResponseEntity.ok(dnsInstructions);
